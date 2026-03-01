@@ -1,5 +1,8 @@
 # YOLOv8 道路场景分割
 
+![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white) ![YOLOv8](https://img.shields.io/badge/YOLOv8-Ultralytics-blue) ![License](https://img.shields.io/badge/License-MIT-green)
+
+
 > 基于 Ultralytics YOLOv8 的实时道路场景语义分割与目标检测系统
 
 ## 项目目的
