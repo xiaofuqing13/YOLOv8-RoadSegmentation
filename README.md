@@ -1,105 +1,74 @@
-# 🚗 YOLOv8-RoadSegmentation — 基于 YOLOv8 的道路实例分割系统
+# YOLOv8-RoadSegmentation — 基于 YOLOv8 的道路实例分割系统
 
-<p align="center">
-  <img src="https://img.shields.io/badge/YOLOv8-Ultralytics-00FFFF?logo=yolo" alt="YOLOv8">
-  <img src="https://img.shields.io/badge/Python-3.8+-3776AB?logo=python&logoColor=white" alt="Python">
-  <img src="https://img.shields.io/badge/OpenCV-4.x-5C3EE8?logo=opencv" alt="OpenCV">
-  <img src="https://img.shields.io/badge/CUDA-GPU加速-76B900?logo=nvidia" alt="CUDA">
-  <img src="https://img.shields.io/badge/🏆-软件杯竞赛作品-gold" alt="Competition">
-  <img src="https://img.shields.io/badge/License-MIT-blue" alt="License">
-</p>
+[![YOLOv8](https://img.shields.io/badge/YOLOv8-Ultralytics-00FFFF)](https://ultralytics.com/)
+[![Python](https://img.shields.io/badge/Python-3.8+-3776AB?logo=python&logoColor=white)](https://python.org/)
+[![CUDA](https://img.shields.io/badge/CUDA-GPU加速-76B900?logo=nvidia)](https://developer.nvidia.com/cuda-toolkit)
+[![License](https://img.shields.io/badge/License-MIT-blue)](LICENSE)
 
-> 🏆 **软件杯竞赛作品** — 基于 **YOLOv8-seg** 模型的道路场景实例分割系统，实现道路标线（实线）的像素级精准检测与分割。支持视频流实时推理、FPS 显示、检测结果视频输出。
+> 软件杯竞赛参赛作品
 
----
+## 项目背景
 
-## ✨ 功能特性
+自动驾驶和辅助驾驶场景中，道路标线（车道线、实线等）的检测是基础且关键的任务。传统基于图像处理的方法（如霍夫变换）在复杂路况下鲁棒性不足，难以应对光照变化、标线磨损、遮挡等实际问题。
 
-- 🎯 **实例分割** — 基于 YOLOv8n-seg 预训练模型微调，像素级分割精度
-- 🎬 **视频推理** — 支持视频文件和摄像头的实时目标检测与分割
-- ⚡ **GPU 加速** — 支持 CUDA 加速推理，实时显示 FPS
-- 📊 **掩码处理** — 自定义掩码后处理脚本 `maskmask.py`
-- 💾 **结果输出** — 自动保存检测结果视频
+本项目使用 YOLOv8-seg 实例分割模型，对道路实线进行 **像素级** 的精准检测与分割，能够在视频流中实时运行并输出检测结果。通过 CUDA GPU 加速，在保证精度的同时达到了实时推理的要求。
 
----
+## 主要功能
 
-## 🏗️ 项目结构
+- 基于 YOLOv8n-seg 预训练模型微调，实现道路实线的像素级分割
+- 支持视频文件和摄像头的实时检测推理
+- CUDA GPU 加速，实时显示推理帧率
+- 自定义掩码后处理（`maskmask.py`）
+- 自动保存检测结果视频
+
+## 项目结构
 
 ```
 YOLOv8-RoadSegmentation/
-├── train.py                 # 模型训练脚本
-├── detectvedio.py           # 视频检测推理脚本（支持摄像头/视频文件）
-├── maskmask.py              # 掩码后处理工具
-├── myseg.yaml               # 自定义数据集配置文件
-├── yolov8-seg.yaml          # YOLOv8-seg 模型架构配置
-├── requirements.txt         # Python 依赖
-├── data/                    # 数据集目录
+├── train.py                 # 模型训练
+├── detectvedio.py           # 视频推理（摄像头/视频文件）
+├── maskmask.py              # 掩码后处理
+├── myseg.yaml               # 数据集配置
+├── yolov8-seg.yaml          # 模型架构配置
+├── requirements.txt         # 依赖
+├── data/
 │   └── dataset_A/           # 训练数据（images + labels）
-├── Label/                   # 标注文件
-├── weights/                 # 预训练权重
-│   └── yolov8n-seg.pt       # YOLOv8n 分割预训练模型
-├── runs/                    # 训练输出（权重、日志、可视化）
-├── ultralytics/             # Ultralytics 框架源码
-└── rear/                    # 后处理相关资源
+├── weights/
+│   └── yolov8n-seg.pt       # 预训练权重
+├── runs/                    # 训练输出
+└── ultralytics/             # Ultralytics 框架
 ```
 
----
+## 快速开始
 
-## 🚀 快速开始
-
-### 环境要求
-- Python 3.8+
-- CUDA 11.x + cuDNN（推荐 GPU 加速）
-- 显存 ≥ 4GB
-
-### 1️⃣ 安装依赖
+**环境要求：** Python 3.8+、CUDA 11.x + cuDNN、显存 ≥ 4GB
 
 ```bash
+# 安装依赖
 pip install -r requirements.txt
-```
 
-### 2️⃣ 模型训练
-
-```bash
+# 训练模型（使用 yolov8n-seg.pt 预训练权重，100 epochs，输入 1280）
 python train.py
-# 使用 yolov8n-seg.pt 预训练权重
-# 训练 100 epochs，输入尺寸 1280
-# 训练结果保存在 runs/segment/train/
-```
 
-### 3️⃣ 视频推理
-
-```bash
+# 视频推理（默认读取 data/example.mp4，CUDA 加速，置信度 0.6）
 python detectvedio.py
-# 默认读取 data/example.mp4
-# 使用 CUDA GPU 加速
-# 置信度阈值：0.6
-# 检测结果保存为 output.mp4
 ```
 
----
+## 配置说明
 
-## ⚙️ 配置说明
+数据集配置（`myseg.yaml`）：
 
-### 数据集配置 (`myseg.yaml`)
 ```yaml
-path: data/dataset_A       # 数据根目录
-train: images/train         # 训练集
-val: images/val             # 验证集
-test: images/test           # 测试集
-
+path: data/dataset_A
+train: images/train
+val: images/val
+test: images/test
 names:
-  0: solid_line             # 实线检测类别
+  0: solid_line
 ```
 
-### 推理参数调整
-在 `detectvedio.py` 中修改：
-- `conf=0.6` — 置信度阈值
-- `device="cuda:0"` — 推理设备
-- `cap = cv2.VideoCapture(...)` — 输入源（视频路径或摄像头 ID）
+推理参数在 `detectvedio.py` 中调整：`conf`（置信度阈值）、`device`（推理设备）、`VideoCapture`（输入源）。
 
----
+## 开源协议
 
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE).
+MIT License
