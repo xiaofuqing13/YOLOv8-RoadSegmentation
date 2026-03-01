@@ -1,4 +1,4 @@
-<![CDATA[# 🚗 YOLOv8-RoadSegmentation — 基于 YOLOv8 的道路实例分割系统
+# 🚗 YOLOv8-RoadSegmentation — 基于 YOLOv8 的道路实例分割系统
 
 <p align="center">
   <img src="https://img.shields.io/badge/YOLOv8-Ultralytics-00FFFF?logo=yolo" alt="YOLOv8">
@@ -103,4 +103,3 @@ names:
 ## 📄 License
 
 This project is licensed under the [MIT License](LICENSE).
-]]>
