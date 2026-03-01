@@ -1,0 +1,12 @@
+# Train/val/test sets as
+# 1) dir: path/to/imgs,
+# 2) file: path/to/imgs.txt
+# 3) list: [path/to/imgs1, path/to/imgs2, ..]
+path: data/dataset_A       # 数据根目录
+train: /Users/xiaofuqing/Downloads/ultralytics/data/split/images/train  # 用于训练的图片数据
+val:  /Users/xiaofuqing/Downloads/ultralytics/data/split/images/val    # 用于验证的图片数据
+test: /Users/xiaofuqing/Downloads/ultralytics/data/split/images/test   # 用于测试的图片数据
+ 
+# 类
+names:
+  0: sloid_line

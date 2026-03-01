@@ -1,0 +1,26 @@
+# === Python ===
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.env
+
+# === Model weights (too large) ===
+runs/
+weights/*.pt
+*.onnx
+
+# === Data ===
+data/dataset_A/
+
+# === IDE ===
+.idea/
+.vscode/
+
+# === macOS ===
+.DS_Store
+._*
+
+# === Output ===
+output.mp4
+result/
