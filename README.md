@@ -31,13 +31,13 @@
 
 单帧推理输出包含目标检测框和置信度评分。
 
-![检测结果](docs/detection_result.png)
+![检测结果](docs/detection-result.png)
 
 ### 训练评估指标
 
 mAP、loss 等核心指标的训练过程曲线。
 
-![训练指标](docs/training_metrics.png)
+![训练指标](docs/training-metrics.png)
 
 ## 技术架构
 
